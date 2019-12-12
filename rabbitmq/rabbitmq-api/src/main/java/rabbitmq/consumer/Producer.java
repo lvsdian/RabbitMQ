@@ -1,8 +1,6 @@
-package rabbitmq.exchange.direct;
+package rabbitmq.consumer;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -10,9 +8,9 @@ import java.util.concurrent.TimeoutException;
 /**
  * @description:
  * @author:LSD
- * @when:2019/12/12/11:53
+ * @when:2019/12/11/21:06
  */
-public class ProducerDirectExchange {
+public class Producer {
     public static void main(String[] args) throws IOException, TimeoutException {
         //1.创建一个ConnectionFactory
         ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -27,14 +25,12 @@ public class ProducerDirectExchange {
         //3.通过connection创建channel
         Channel channel = connection.createChannel();
 
-        //声明
-        String exchangeName = "test_direct_exchange";
-        String routingKey = "test.direct";
+        //4.通过channel发送数据
+        String exchange = "test_consumer_exchange";
+        String routingKey = "consumer.save";
 
-        String msg = "hello direct exchange";
-        channel.basicPublish(exchangeName,routingKey,null,msg.getBytes());
+        String msg = "hello consumer  message";
 
-        channel.close();
-        connection.close();
+        channel.basicPublish(exchange,routingKey,true,null,msg.getBytes());
     }
 }

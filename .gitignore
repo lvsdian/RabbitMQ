@@ -1,4 +1,5 @@
 # IDE
 *.iml
 .idea
-
+**/.idea
+**/*.iml
