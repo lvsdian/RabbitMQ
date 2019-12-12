@@ -4,11 +4,11 @@
 
 - jms是java的消息服务，属API规范，有点对点、发布订阅两种模式，支持TextMessage、MapMessage 等复杂的消息正文格式(5种)。
 
-- ;AMQP是高级消息队列协议，提供5种消息模型(direct/fanout/topic/headers/system)，仅支持byte[]类型信息，几种消息队列都是基于AMQP来实现的。
+- AMQP是高级消息队列协议，提供5种消息模型(direct/fanout/topic/headers/system)，仅支持byte[]类型信息，几种消息队列都是基于AMQP来实现的。
 
 ##### 协议模型
 
-![](img\AMQP协议模型.jpg)
+![](img/AMQP协议模型.jpg)
 
 ##### 核心概念
 
@@ -92,27 +92,27 @@ firewall-cmd --reload
 
 ##### 命令行使用
 
-![](img\rabbitmq_option_1.jpg)
+![](img/rabbitmq_option_1.jpg)
 
-![](img\rabbitmq_option_2.jpg)
+![](img/rabbitmq_option_2.jpg)
 
 
 
-![](img\rabbitmq_option_3.jpg)
+![](img/rabbitmq_option_3.jpg)
 
-![](img\rabbitmq_option_4.jpg)
+![](img/rabbitmq_option_4.jpg)
 
-![](img\rabbitmq_option_5.jpg)
+![](img/rabbitmq_option_5.jpg)
 
-![](img\rabbitmq_option_6.jpg)
+![](img/rabbitmq_option_6.jpg)
 
-![](img\rabbitmq_option_7.jpg)
+![](img/rabbitmq_option_7.jpg)
 
 ##### 架构图
 
 
 
-<img src="img\rabbitmq整体架构图.jpg" style="zoom: 67%;" />
+<img src="img/rabbitmq整体架构图.jpg" style="zoom: 67%;" />
 
 #### exchange
 
@@ -120,11 +120,12 @@ firewall-cmd --reload
 
 接收消息，并根据路由键转发消息到队列。
 
-![](img\exchange.jpg)
+![](img/exchange.jpg)
 
 ##### 属性
 
-	1. name
+1. name
+
  	2. type：交换机类型，direct、topic、fanout、headers。
  	3. durability：是否需要持久化。
  	4. auto delete：当最后一个绑定到exchange上的队列删除后，自动删除该exchange。
@@ -137,7 +138,7 @@ firewall-cmd --reload
 
 ​		注意：Direct模式可以使用rabbitmq自带的exchange：default exchange，所以不需要将exchange进行任何绑定操作，消息传递时，RouteKey必须完全匹配才会被队列接收，否则该消息会被抛弃。
 
-![](img\direct_exchange结构图.jpg)
+![](img/direct_exchange结构图.jpg)
 
 ##### Topic Exchange
 
@@ -147,4 +148,4 @@ firewall-cmd --reload
 
 ​		模糊匹配：`#`匹配一个或多个词，`*`匹配不多不少一个词。
 
-![](C:\Users\LSD\Desktop\rabbitMQ\img\topic_exchange结构图.jpg)
+![](img/topic_exchange结构图.jpg)

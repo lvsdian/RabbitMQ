@@ -207,6 +207,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LSD\Desktop\rabbitMQ\rabbitmq\rabbitmq-api\src\main\java" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -272,12 +277,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576124536211</updated>
-      <workItem from="1576124539841" duration="638000" />
+      <workItem from="1576124539841" duration="1003000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="638000" />
+    <option name="totallyTimeSpent" value="1003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="265" y="44" width="1105" height="868" extended-state="1" />
