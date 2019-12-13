@@ -277,3 +277,55 @@ firewall-cmd --reload
 ## 消费端限流
 
 ​		rabbitmq提供了一种qos(服务质量保证)功能，即在非自动确认消息的前提下，如果一定数目的消息(通过基于consume或者channel设置qos的值)未被确认前，不消费新的消息。
+
+​		使用限流不能设置自动签收，
+
+- `channel.basicConsume`中`autoAck`要设为`false`，
+
+- 消费端`channel.basicQos(int prefetchSize, int prefetchCount, boolean global)`中，
+
+  - `prefetchSize`：0
+
+  - `prefetchCount`：告诉rabbitMQ不要一次推送多余N个消息，如果有N个消息没有ack，consumer将block掉，直到有消息ack。
+
+  - `global`：是否将上面的设置应用于channel，即这个限制是channel级别还是consumer级别。
+
+  - `prefetchSize`、`global`这两项rabbitmq中还没有实现，暂不研究，`prefetchCount`必须在`autoAck`为`false`时才会生效。
+
+## TTL 
+
+- ttl是time to live的缩写，也就是生存时间。
+
+- rabbitmq支持消息的过期时间，在消息发送时进行执行。
+
+- rabbitmq支持队列的过期时间，从消息入队开始计算，只要超时，消息就会被清除。
+
+## 死信队列
+
+- 死信队列：DLX （Dead Letter Exchange）
+
+- 利用DLX，当消息在一个队列中变成死信之后，它能被重新publish到另一个exchange，这个exchange就是DLX。
+
+- 消息变为死信有以下几种请求：
+
+  - 消息被拒绝：`basic.reject`/`basic.nack`并且`requeue=false`
+
+  - 消息TTL过期
+
+  - 队列到达最大长度
+
+- DLX也是一个正常的exchange，和一般的exchange没有区别，它能在任何的队列上被指定，实际上就是设置某个队列的属性。
+
+- 当这个队列中有死信时，rabbitmq就会自动的将这个消息重新发布到设置的exchange上去，进而被路由到另一个队列。
+
+- 实现：
+
+   1. 设置死信队列的`exchange`和`queue`：
+
+       	1. Exchange：`dlx.exchange`
+       	2. Rueue：`dlx.queue`
+       	3. RoutingKey：`#`
+
+      2.正常声明交换机、队列、绑定，并在队列上加一个参数：
+
+      ​	`arguments.put("x-dead-letter-exchange","dlx.exchange");`
