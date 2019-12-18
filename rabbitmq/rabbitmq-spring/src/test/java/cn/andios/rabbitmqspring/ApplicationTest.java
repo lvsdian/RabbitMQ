@@ -1,5 +1,6 @@
 package cn.andios.rabbitmqspring;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.AmqpException;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import rabbitmq.Application;
+import rabbitmq.entity.Order;
 
 import java.util.HashMap;
 
@@ -81,15 +83,29 @@ public class ApplicationTest {
     public void testSendMsg2() throws Exception{
 
         MessageProperties messageProperties = new MessageProperties();
-        messageProperties.getHeaders().put("desc","信息描述");
-        messageProperties.getHeaders().put("type","自定义消息类型");
-        Message message = new Message("hello message".getBytes(),messageProperties);
+        messageProperties.setContentType("text/plain");
+        Message message = new Message("hello 123".getBytes(),messageProperties);
 
         rabbitTemplate.send("topic001","spring.abc",message);
 
         rabbitTemplate.convertAndSend("topic001", "spring.amqp","hello Object send");
-        rabbitTemplate.convertAndSend("topic002", "rabbitmq.amqp","hello Object send");
+        rabbitTemplate.convertAndSend("topic002", "rabbitmq.amqp","hello Object send111");
     }
 
+    @Test
+    public void testSendMsg4Text() throws Exception{
+
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.setContentType("text/plain");
+        Message message = new Message("hello 123".getBytes(),messageProperties);
+
+        rabbitTemplate.send("topic001","spring.abc",message);
+        rabbitTemplate.send("topic002","rabbit.abc",message);
+    }
+
+    public void testSendJsonMessage(){
+        Order order = new Order("001", "消息订单", "订单内容");
+
+    }
 
 }

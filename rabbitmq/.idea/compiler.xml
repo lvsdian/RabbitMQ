@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="rabbitmq-api" />
         <module name="rabbitmq-spring" />
+        <module name="rabbitmq-springboot-consumer" />
+        <module name="rabbitmq-springboot-producer" />
       </profile>
     </annotationProcessing>
   </component>

@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbitmq-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbitmq-spring" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rabbitmq-springboot-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rabbitmq-springboot-producer" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
