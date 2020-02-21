@@ -2,7 +2,7 @@
 
 ### AMQP vs JMS
 
-- jms是java的消息服务，属API规范，有点对点、发布订阅两种模式，支持TextMessage、MapMessage 等复杂的消息正文格式(5种)。
+- jms是java的消息服务，属API规范，类似JDBC。jms有点对点、发布订阅两种模式，支持TextMessage、MapMessage 等复杂的消息正文格式(5种)。
 
 - AMQP是高级消息队列协议，提供5种消息模型(direct/fanout/topic/headers/system)，仅支持byte[]类型信息，几种消息队列都是基于AMQP来实现的。
 
@@ -32,7 +32,7 @@ mq性能衡量指标：服务性能、数据存储、集群架构。
 
 #### kafka
 
-​		apache顶级项目，基于pull模式来处理消息，追求高吞吐量，性能非常好，对消息重复、丢失、错误没有严格要求。如果要求消息的可靠性投递，就不能选择kafka。
+​		apache顶级项目，基于pull模式来处理消息，追求高吞吐量，性能非常好，对消息重复、丢失、错误没有严格要求。如果要求消息的可靠性投递，就不能选择kafka。在**大数据领域**的**实时计算**以及**日志采集**被大规模使用。
 
 #### rocketmq
 
@@ -44,12 +44,10 @@ mq性能衡量指标：服务性能、数据存储、集群架构。
 
 ​		RabbitMQ基于信道channel传输，没有用tcp连接来进行数据传输，tcp链接创建和销毁对于系统性能的开销比较大消费者链接RabbitMQ其实就是一个TCP链接，一旦链接创建成功之后，    就会基于链接创建Channel，每个线程把持一个Channel,Channel复用TCP链接，减少了系统创建和销毁链接的消耗，提高了性能 
 
-- 吞吐量：activeMQ、rabbitMQ比rocketMQ、kafka低  
-- 时效性：RabbitMQ基于erlang开发，并发能力强，延时很低，达到微秒级，其他三个都是 ms 级。
+- 吞吐量：**activeMQ、rabbitMQ为万级，比rocketMQ、kafka十万级低**  
+- 时效性：RabbitMQ**基于erlang开发**，并发能力强，**延时很低，达到微秒级，其他三个都是 ms 级**。
 - 可用性：activeMQ、rabbitMQ基于主从架构实现高可用，rocketMQ、kafka基于分布式架构实现高可用
 - 性能：rabbitmq采用erlang语言开发，使得rabbitmq在broker之间进行数据交互性能非常优秀。erlang有着和原生socket一样的延迟
-
-
 
 ## rabbitmq
 
@@ -243,8 +241,8 @@ firewall-cmd --reload
 
 问题：
 
-	1.redis中数据是否进行落库，如果落库，落库过程如何做到原子性。
-  		2. 如果不落库，都存到缓存中，如何设置定时同步策略
+1.redis中数据是否进行落库，如果落库，落库过程如何做到原子性。
+2.如果不落库，都存到缓存中，如何设置定时同步策略
 
 ## Confirm确认消息
 
